@@ -54,3 +54,31 @@ Script-Migration -From InitialCreate -To AddOrderTable -Output .\DAL\SqlScripts\
 ```
 
 ---
+
+如需更多 EF Core CLI 語法說明，可參考官方文件：[https://docs.microsoft.com/ef/core/cli/](https://docs.microsoft.com/ef/core/cli/)
+
+---
+
+## 🛠️ 額外實作功能說明
+
+### 📘 1. API 呼叫與外部 API 的 Request/Response Log
+
+- 所有進入 API 的 Request 及 Response，以及對外部 API 的請求與回應內容，皆會被記錄。
+- 使用 **NLog** 作為日誌系統，將記錄輸出至指定日誌檔案。
+- 可擴充記錄內容（如 Headers、StatusCode、ElapsedTime 等）。
+
+---
+
+### ❗ 2. Error Handling 統一處理 API Response
+
+- 使用自訂的 `ExceptionFilterAttribute`。
+- 處理所有未捕捉的例外，回傳統一格式的 API 回應（包含錯誤代碼、訊息等）。
+- 確保前端或呼叫端收到一致的錯誤資訊。
+
+---
+
+### 🔐 3. 加解密技術應用（AES / RSA）
+
+- 實作 AES 加解密工具類別，提供簡單介面呼叫。
+- 加解密所需的 `Key` 與 `IV` 可透過環境變數進行設定。
+- 保持加解密邏輯安全且可配置，便於依環境切換。
