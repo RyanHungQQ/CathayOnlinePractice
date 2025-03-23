@@ -7,6 +7,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -27,6 +34,7 @@ bld/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+.vs/
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
