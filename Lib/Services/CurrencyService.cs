@@ -1,87 +1,60 @@
-﻿using Common.Enums;
-using DAL.DbContexts;
-using DAL.Entities;
-using Lib.Services.Interface;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Common.Enums;
+using Lib.Interfaces.Repositories;
+using Lib.Interfaces.Services;
 using Models.CathayOnlinePractice.Response;
 using Models.CathayOnlinePractice.Resqust;
+using Models.Entities;
 
 namespace Lib.Services
 {
-    public class CurrencyService : ICurrencyService
+    public class CurrencyService : BaseEntityService<Currency>, ICurrencyService
     {
-        private readonly DbEntities _context;
 
-        public CurrencyService(DbEntities context)
+        public CurrencyService(
+            IMapper mapper,
+            IDbEntities dbEntities,
+            IRepository<Currency> repository):base(mapper, dbEntities, repository)
         {
-            _context = context;
         }
 
         public async Task<IEnumerable<CurrencyResponseDto>> GetAllCurrenciesAsync()
         {
-            var currencies = await _context.Currency.ToListAsync();
-            var currencyDTOs = currencies.Select(currency => new CurrencyResponseDto
-            {
-                Id = currency.Id,
-                Code = currency.Code,
-                Name = currency.Name,
-                CreateDate = currency.CreateDate,
-                ModifyDate = currency.ModifyDate
-            }).OrderBy(o => o.Code).ToList();
-            return currencyDTOs;
+            var currencies = new List<CurrencyResponseDto>();
+            currencies = base.GetAll<CurrencyResponseDto>().OrderBy(o => o.Code).ToList();
+            return currencies;
         }
 
         public async Task<APIResponseDto<CurrencyResponseDto>> GetCurrencyByIdAsync(int id)
         {
             var result = new APIResponseDto<CurrencyResponseDto>();
-            var currency = await _context.Currency.FindAsync(id);
+            var currency = base.GetSingle<CurrencyResponseDto>(o => o.Id == id);
             if (currency == null)
             {
                 result.ResponseEnum = WebApiEnum.APIResponseEnum.NotFound;
                 return result;
             }
             result.ResponseEnum = WebApiEnum.APIResponseEnum.Success;
-            result.OutData = await GetSingleCurrency(id);
+            result.OutData = currency;
             return result;
-        }
-        private async Task<CurrencyResponseDto> GetSingleCurrency(int id)
-        {
-            var currency = await _context.Currency.FindAsync(id);
-            if (currency == null)
-            {
-                return null;
-            }
-            return new CurrencyResponseDto
-            {
-                Id = currency.Id,
-                Code = currency.Code,
-                Name = currency.Name,
-                CreateDate = currency.CreateDate,
-                ModifyDate = currency.ModifyDate
-            };
         }
 
         public async Task<APIResponseDto<CurrencyResponseDto>> CreateCurrencyAsync(CurrnecyResqustDto currencyDto)
         {
             var result = new APIResponseDto<CurrencyResponseDto>();
 
-            var exist = await _context.Currency.CountAsync(o => o.Code == currencyDto.Code);
+            var exist = base.GetCount(o => o.Code == currencyDto.Code);
             if (exist > 0)
             {
                 result.ResponseEnum = WebApiEnum.APIResponseEnum.DataExist;
                 return result;
             }
-
-            var currency = new Currency
-            {
-                Code = currencyDto.Code,
-                Name = currencyDto.Name,
-            };
-            _context.Currency.Add(currency);
-            await _context.SaveChangesAsync();
+            var currency = currencyDto.ToEntity();
+            Repository.Insert(currency);
+            DbEntities.SaveChanges();
 
             result.ResponseEnum = WebApiEnum.APIResponseEnum.Success;
-            result.OutData = await GetSingleCurrency(currency.Id);
+            result.OutData = base.GetSingle<CurrencyResponseDto>(o => o.Id == currency.Id);
             return result;
         }
 
@@ -89,43 +62,39 @@ namespace Lib.Services
         {
             var result = new APIResponseDto<CurrencyResponseDto>();
 
-            var exist = await _context.Currency.CountAsync(o => o.Code == currencyDto.Code && o.Id != id);
-            if (exist > 0)
-            {
-                result.ResponseEnum = WebApiEnum.APIResponseEnum.DataExist;
-                return result;
-            }
-
-            var existingCurrency = await _context.Currency.FindAsync(id);
+            var existingCurrency = Repository.GetSingle(o => o.Id == id);
             if (existingCurrency == null)
             {
                 result.ResponseEnum = WebApiEnum.APIResponseEnum.NotFound;
                 return result;
             }
 
+            var exist = base.GetCount(o => o.Code == currencyDto.Code && o.Id != id);
+            if (exist > 0)
+            {
+                result.ResponseEnum = WebApiEnum.APIResponseEnum.DataExist;
+                return result;
+            }
+
             existingCurrency.Code = currencyDto.Code;
             existingCurrency.Name = currencyDto.Name;
-
-            _context.Entry(existingCurrency).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            base.Update(existingCurrency);
 
             result.ResponseEnum = WebApiEnum.APIResponseEnum.Success;
-            result.OutData = await GetSingleCurrency(id);
+            result.OutData = base.GetSingle<CurrencyResponseDto>(o => o.Id == id);
             return result;
         }
 
         public async Task<APIResponseDto> DeleteCurrencyAsync(int id)
         {
             var result = new APIResponseDto();
-            var currency = await _context.Currency.FindAsync(id);
-            if (currency == null)
+            var existingCurrency = base.GetSingle<CurrencyResponseDto>(o => o.Id == id);
+            if (existingCurrency == null)
             {
                 result.ResponseEnum = WebApiEnum.APIResponseEnum.NotFound;
                 return result;
             }
-
-            _context.Currency.Remove(currency);
-            await _context.SaveChangesAsync();
+            base.Delete(o => o.Id == id);
             result.ResponseEnum = WebApiEnum.APIResponseEnum.Success;
             return result;
         }

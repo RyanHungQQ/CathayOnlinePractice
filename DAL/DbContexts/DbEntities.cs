@@ -1,16 +1,19 @@
-﻿using DAL.Entities;
+﻿using Lib.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Models.Entities;
 
 namespace DAL.DbContexts
 {
-    public class DbEntities : DbContext
+    public class DbEntities : DbContext, IDbEntities
     {
         public DbEntities(DbContextOptions<DbEntities> options)
             : base(options)
         { }
 
+        #region DbSet
         // DbSet 屬性對應於資料庫中的資料表
         public DbSet<Currency> Currency { get; set; }
+        #endregion
 
         public override int SaveChanges()
         {

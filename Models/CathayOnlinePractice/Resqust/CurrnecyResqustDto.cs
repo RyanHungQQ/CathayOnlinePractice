@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Models.Mappings;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models.CathayOnlinePractice.Resqust
 {
-    public class CurrnecyResqustDto
+    public class CurrnecyResqustDto : Mapper<CurrnecyResqustDto, Entities.Currency>
     {
         /// <summary>
         /// 幣別代碼

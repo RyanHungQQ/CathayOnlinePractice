@@ -3,6 +3,7 @@ using DAL;
 using Lib;
 using Lib.Middleware;
 using Microsoft.OpenApi.Models;
+using Models;
 using NLog.Web;
 using System.Reflection;
 using WebApi.Attributes;
@@ -37,6 +38,7 @@ builder.Services.AddControllers(options =>
 #region ref proj
 builder.Services.AddDAL();
 builder.Services.AddLib();
+builder.Services.AddModels();
 #endregion ref proj
 
 builder.Services.AddControllers();

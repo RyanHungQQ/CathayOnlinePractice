@@ -1,9 +1,10 @@
 ﻿using Models.CathayOnlinePractice.Response;
 using Models.CathayOnlinePractice.Resqust;
+using Models.Entities;
 
-namespace Lib.Services.Interface
+namespace Lib.Interfaces.Services
 {
-    public interface ICurrencyService
+    public interface ICurrencyService: IBaseEntityService<Currency>
     {
         Task<IEnumerable<CurrencyResponseDto>> GetAllCurrenciesAsync();
         Task<APIResponseDto<CurrencyResponseDto>> GetCurrencyByIdAsync(int id);

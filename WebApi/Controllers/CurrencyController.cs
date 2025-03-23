@@ -1,5 +1,4 @@
-﻿using Common.Extensions;
-using Lib.Services.Interface;
+﻿using Lib.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Models.CathayOnlinePractice.Response;
 using Models.CathayOnlinePractice.Resqust;

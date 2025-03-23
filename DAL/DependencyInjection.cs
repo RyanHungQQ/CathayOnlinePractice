@@ -1,7 +1,10 @@
 ﻿using Common.Common;
 using DAL.DbContexts;
+using DAL.Repositories;
+using Lib.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DAL
 {
@@ -18,7 +21,11 @@ namespace DAL
             // 註冊 DbContext 並配置連接字串
             services.AddDbContext<DbEntities>(options =>
                 options.UseSqlServer(Setting.ConnectionString));
+            // 註冊DbAction
+            services.AddScoped<IDbEntities, DbEntities>();
 
+            // 註冊通用型Repository
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             return services;
         }
     }

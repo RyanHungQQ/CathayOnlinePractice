@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{D0B713BC-E170-4BCE-B9AB-B70BCACE0EC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{D0B713BC-E170-4BCE-B9AB-B70BCACE0EC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{8849450F-CCFF-49DA-B37B-CF5C68677229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{8849450F-CCFF-49DA-B37B-CF5C68677229}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{FA17374F-FC36-4713-B53E-F42E0A19AC69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{FA17374F-FC36-4713-B53E-F42E0A19AC69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{830821FE-8484-4B14-8F2E-D4D4323B9EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{830821FE-8484-4B14-8F2E-D4D4323B9EEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{33902D6B-4CBC-4486-9104-54D1F4E138B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "Lib\Lib.csproj", "{33902D6B-4CBC-4486-9104-54D1F4E138B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{56FB2925-ED76-4A5F-8EA1-55272F2CDDCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{56FB2925-ED76-4A5F-8EA1-55272F2CDDCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Interfaces", "Lib.Interfaces\Lib.Interfaces.csproj", "{B144A791-74D1-4A77-9D38-E6310B7B0AA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{56FB2925-ED76-4A5F-8EA1-55272F2CDDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56FB2925-ED76-4A5F-8EA1-55272F2CDDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56FB2925-ED76-4A5F-8EA1-55272F2CDDCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B144A791-74D1-4A77-9D38-E6310B7B0AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B144A791-74D1-4A77-9D38-E6310B7B0AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B144A791-74D1-4A77-9D38-E6310B7B0AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B144A791-74D1-4A77-9D38-E6310B7B0AA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

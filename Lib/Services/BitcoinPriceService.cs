@@ -1,11 +1,9 @@
-﻿using Azure;
+﻿using Lib.Interfaces.Services;
 using Lib.Mocks;
-using Lib.Services.Interface;
 using Models.CathayOnlinePractice.Response;
 using Models.Dto;
 using Newtonsoft.Json;
 using NLog;
-using System;
 using ILogger = NLog.ILogger;
 
 namespace Lib.Services

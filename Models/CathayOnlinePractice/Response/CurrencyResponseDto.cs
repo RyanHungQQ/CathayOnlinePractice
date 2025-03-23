@@ -1,4 +1,6 @@
-﻿namespace Models.CathayOnlinePractice.Response
+﻿using Models.Mappings;
+
+namespace Models.CathayOnlinePractice.Response
 {
     /// <summary>
     /// 幣別傳回資訊

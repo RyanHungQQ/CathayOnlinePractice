@@ -1,9 +1,6 @@
-﻿using Azure;
-using Common.Enums;
-using DAL.Entities;
+﻿using Common.Enums;
 using FluentAssertions;
-using Lib.Services.Interface;
-using Microsoft.AspNetCore.Http;
+using Lib.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Models.CathayOnlinePractice.Response;
 using Models.CathayOnlinePractice.Resqust;

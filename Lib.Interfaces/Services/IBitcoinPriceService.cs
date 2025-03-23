@@ -1,7 +1,7 @@
 ﻿using Models.CathayOnlinePractice.Response;
 using Models.Dto;
 
-namespace Lib.Services.Interface
+namespace Lib.Interfaces.Services
 {
     public interface IBitcoinPriceService
     {

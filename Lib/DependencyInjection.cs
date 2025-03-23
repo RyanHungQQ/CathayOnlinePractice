@@ -1,5 +1,5 @@
-﻿using Lib.Services;
-using Lib.Services.Interface;
+﻿using Lib.Interfaces.Services;
+using Lib.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lib
@@ -15,6 +15,7 @@ namespace Lib
         public static IServiceCollection AddLib(this IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddScoped(typeof(IBaseEntityService<>), typeof(BaseEntityService<>));
             services.AddScoped<IBitcoinPriceService, BitcoinPriceService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
 
